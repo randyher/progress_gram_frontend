@@ -7,12 +7,30 @@ class Login extends React.Component {
     }
 
     onChange = (e) => {
-        this.setState({[e.target.name]: e.target.value})
+        this.setState({ [e.target.name]: e.target.value })
     }
 
-    handleSubmit = (e) => {        
+    handleSubmit = (e) => {
         e.preventDefault()
-        this.props.logUserIn(this.state)
+
+        fetch("https://localhost3000.com/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(this.state)
+        })
+            .then(res => res.json())
+            .then(userData => {
+                if (userData.jwt) {
+                    console.log(userData); 
+                } else {
+                    console.log(userData);
+                    this.setState({ errors: userData.message });
+                }
+            });
+
+        // this.props.logUserIn(this.state)
     }
 
     render() {
