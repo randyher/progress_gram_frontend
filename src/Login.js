@@ -13,7 +13,7 @@ class Login extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault()
 
-        fetch("https://localhost3000.com/login", {
+        fetch("http://localhost:3000/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
